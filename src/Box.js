@@ -6,7 +6,8 @@ var boxStyles = {
   border: '1px solid black',
   display: 'inline-block',
   margin: 0,
-  padding: 0
+  padding: 0,
+  background: 'beige',
 }
 
 var boxTextStyle = {
@@ -14,16 +15,22 @@ var boxTextStyle = {
 
 }
 
-var Box = React.createClass({
-  render: function() {
+class Box extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "This is a box"
+    }
+  }
+  render() {
     return (
       <div style={boxStyles}>
         <p className={boxTextStyle}>
-          This is a box.
+          {this.state.text}
         </p>
       </div>
     )
   }
-})
+}
 
 module.exports = Box
