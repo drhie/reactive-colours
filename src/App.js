@@ -12,7 +12,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>React App Exercise</h2>
+          <h2>React to the Colors of the Rainbow</h2>
         </div>
         <p className="App-intro">
           Click on the boxes to do stuff.

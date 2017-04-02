@@ -19,12 +19,23 @@ class Box extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "This is a box"
+      text: "This is a box",
+      clicked: false
     }
   }
+
+  handleClick() {
+    var clicked = this.state.clicked
+    var newText = clicked ? "This is a clicked box" : "This is an unclicked box";
+    this.setState({
+      text: newText,
+      clicked: !this.state.clicked
+    })
+  }
+
   render() {
     return (
-      <div style={boxStyles}>
+      <div style={boxStyles} onClick={() => this.handleClick()}>
         <p className={boxTextStyle}>
           {this.state.text}
         </p>
