@@ -26,6 +26,7 @@
   margin: 10px;
   padding: 0;
   background: beige;
+  opacity: 0.8;
 }
 
 @keyframes App-logo-spin {
