@@ -4,6 +4,7 @@ import './App.css';
 // var ReactDOM = require('react-dom')
 
 var BoxShell = require('./BoxShell')
+var PointsBar = require('./Points')
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           Click on the boxes to do stuff.
         </p>
         <BoxShell />
+        <PointsBar />
       </div>
     );
   }
