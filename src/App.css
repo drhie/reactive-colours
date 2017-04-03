@@ -27,6 +27,15 @@
   padding: 0;
   background: beige;
   opacity: 0.8;
+  border-radius: 10%;
+}
+
+.Box p {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 @keyframes App-logo-spin {

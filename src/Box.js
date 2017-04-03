@@ -9,7 +9,7 @@ class Box extends React.Component {
     super();
     this.state = {
       value: "Lovely!",
-      backgroundColor: 'beige'
+      backgroundColor: 'gray'
     }
   }
 
@@ -29,7 +29,9 @@ class Box extends React.Component {
   render() {
     return (
       <div className="Box" style={{background:this.state.backgroundColor}} onClick={() => { this.props.onClick(); this.changeColor() }}>
-        {this.props.value || this.state.value}
+        <p>
+          {this.props.value || this.state.value}
+        </p>
       </div>
     );
   }
