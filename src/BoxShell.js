@@ -25,11 +25,10 @@ class BoxShell extends React.Component {
     boxes[i] = "X";
     this.setState({
       boxes: boxes,
-      backgroundColor: 'blue'
     });
   }
   renderBox(i) {
-    return <Box value={this.state.boxes[i]} backgroundColor={this.state.backgroundColor} onClick={() => this.handleClick(i)} />;
+    return <Box value={this.state.boxes[i]} onClick={() => this.handleClick(i)} />;
   }
   render() {
     return(
