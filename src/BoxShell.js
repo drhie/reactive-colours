@@ -22,7 +22,14 @@ class BoxShell extends React.Component {
   }
   handleClick(i) {
     const boxes = this.state.boxes.slice();
-    boxes[i] = "X";
+    let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+    let curColor = colors.indexOf(boxes[i]);
+    if (curColor < 0) {
+      curColor = 0
+    } else {
+      curColor ++
+    }
+    boxes[i] = colors[curColor];
     this.setState({
       boxes: boxes,
     });

@@ -15,7 +15,7 @@ class App extends Component {
           <h2>React to the Colors of the Rainbow</h2>
         </div>
         <p className="App-intro">
-          Click on the boxes to do stuff.
+          Click on the boxes to change the colours. You will accumulate points as you go along.
         </p>
         <BoxShell />
         <PointsBar />
