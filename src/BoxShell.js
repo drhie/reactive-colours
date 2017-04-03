@@ -1,5 +1,5 @@
 var React = require('react')
-// var Box = require('./Box')
+var Box = require('./Box')
 
 var boxShellStyles = {
   width: 602,
@@ -7,27 +7,10 @@ var boxShellStyles = {
   display: 'inline-block'
 }
 
-var boxStyles = {
-  width: 100,
-  height: 100,
-  border: '1px solid black',
-  display: 'inline-block',
-  margin: 0,
-  padding: 0,
-  background: 'beige',
-}
 
 var boxTextStyle = {
   'vertical-align': 'middle',
 
-}
-
-function Box(props) {
-  return (
-    <div style={boxStyles} onClick={() => props.onClick()}>
-      {props.value}
-    </div>
-  );
 }
 
 class BoxShell extends React.Component {
@@ -39,9 +22,9 @@ class BoxShell extends React.Component {
   }
   handleClick(i) {
     const boxes = this.state.boxes.slice();
-    boxes[i] = "This Box has been Clicked!";
+    boxes[i] = "X";
     this.setState({
-      boxes: boxes
+      boxes: boxes,
     });
   }
   renderBox(i) {

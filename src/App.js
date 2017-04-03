@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 // var ReactDOM = require('react-dom')
 
 var BoxShell = require('./BoxShell')
