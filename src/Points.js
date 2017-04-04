@@ -13,7 +13,7 @@ class PointsBar extends React.Component {
     var points = 0;
     return (
       <div style={pointsBarStyle}>
-        <p>Points: {points}</p>
+        <p>Points: {this.props.points}</p>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 var React = require('react')
 var Box = require('./Box')
+var PointsBar = require('./Points')
 
 var boxShellStyles = {
   width: 602,
@@ -17,7 +18,8 @@ class BoxShell extends React.Component {
   constructor() {
     super();
     this.state = {
-      boxes: Array(6).fill(null)
+      boxes: Array(6).fill(null),
+      points: 0,
     }
   }
   handleClick(i) {
@@ -32,11 +34,23 @@ class BoxShell extends React.Component {
     boxes[i] = colors[curColor];
     this.setState({
       boxes: boxes,
+      points: this.calculatePoints(),
     });
   }
   renderBox(i) {
     return <Box value={this.state.boxes[i]} onClick={() => this.handleClick(i)} />;
   }
+
+  calculatePoints(){
+    let points = this.state.points;
+    this.setState({points: points += 1})
+    return points
+  }
+
+  renderPointsBar() {
+    return <PointsBar points={this.state.points} />
+  }
+
   render() {
     return(
       <div>
@@ -47,7 +61,7 @@ class BoxShell extends React.Component {
         {this.renderBox(3)}
         {this.renderBox(4)}
         {this.renderBox(5)}
-
+        {this.renderPointsBar()}
       </div>
     )
   }

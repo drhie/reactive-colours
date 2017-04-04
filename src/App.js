@@ -18,7 +18,6 @@ class App extends Component {
           Click on the boxes to change the colours. You will accumulate points as you go along.
         </p>
         <BoxShell />
-        <PointsBar />
       </div>
     );
   }
