@@ -34,17 +34,32 @@ class BoxShell extends React.Component {
     boxes[i] = colors[curColor];
     this.setState({
       boxes: boxes,
-      points: this.calculatePoints(),
     });
   }
   renderBox(i) {
-    return <Box value={this.state.boxes[i]} onClick={() => this.handleClick(i)} />;
+    return <Box value={this.state.boxes[i]} onClick={() => {this.handleClick(i); this.calculatePoints()}} />;
   }
 
   calculatePoints(){
     let points = this.state.points;
-    this.setState({points: points += 1})
-    return points
+    let mutualColor = 0;
+    let boxColor;
+    this.state.boxes.forEach(function (box, index) {
+      if (index == 0) {
+        boxColor = box
+      }
+      if (box == boxColor) {
+        mutualColor ++
+      }
+    });
+    if (this.state.boxes.length == mutualColor) {
+      alert("All the colors match!");
+      mutualColor = 0;
+      points  += 20
+    }
+    this.setState({
+      points: points
+    })
   }
 
   renderPointsBar() {
