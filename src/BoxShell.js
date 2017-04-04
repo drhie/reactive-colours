@@ -36,9 +36,6 @@ class BoxShell extends React.Component {
       boxes: boxes,
     });
   }
-  renderBox(i) {
-    return <Box value={this.state.boxes[i]} onClick={() => {this.handleClick(i); this.calculatePoints()}} />;
-  }
 
   calculatePoints(){
     let points = this.state.points;
@@ -62,21 +59,19 @@ class BoxShell extends React.Component {
     })
   }
 
-  renderPointsBar() {
-    return <PointsBar points={this.state.points} />
-  }
-
   render() {
     return(
       <div>
+        { [0, 1, 2, 3, 4, 5].map(function(i) {
+          return this.renderBox(i);
+          <Box
+            key={i}
+            value={this.state.boxes[i]}
+            onClick={() => {this.handleClick(i); this.calculatePoints()}}
+          />
+        }.bind(this)) }
 
-        {this.renderBox(0)}
-        {this.renderBox(1)}
-        {this.renderBox(2)}
-        {this.renderBox(3)}
-        {this.renderBox(4)}
-        {this.renderBox(5)}
-        {this.renderPointsBar()}
+        <PointsBar points={this.state.points} />
       </div>
     )
   }
