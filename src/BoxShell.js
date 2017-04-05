@@ -32,9 +32,10 @@ class BoxShell extends React.Component {
       curColor ++
     }
     boxes[i] = colors[curColor];
-    this.setState({
-      boxes: boxes,
-    });
+    this.setState(
+      {boxes: boxes},
+      function() {this.calculatePoints()}
+    );
   }
 
   calculatePoints(){
@@ -50,25 +51,24 @@ class BoxShell extends React.Component {
       }
     });
     if (this.state.boxes.length == mutualColor) {
-      alert("All the colors match!");
+      // alert("All the colors match!");
       mutualColor = 0;
       points  += 20
     }
-    this.setState({
-      points: points
-    })
+    this.setState({points: points})
   }
 
   render() {
     return(
       <div>
         { [0, 1, 2, 3, 4, 5].map(function(i) {
-          return this.renderBox(i);
-          <Box
-            key={i}
-            value={this.state.boxes[i]}
-            onClick={() => {this.handleClick(i); this.calculatePoints()}}
-          />
+          return (
+            <Box
+              key={i}
+              value={this.state.boxes[i]}
+              onClick={() => this.handleClick(i)}
+            />
+          )
         }.bind(this)) }
 
         <PointsBar points={this.state.points} />
