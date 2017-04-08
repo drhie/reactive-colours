@@ -5,7 +5,7 @@ class Box extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "Lovely!",
+      value: "o",
       backgroundColor: 'gray'
     }
   }

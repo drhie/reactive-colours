@@ -3,12 +3,21 @@ var Box = require('./Box')
 var Button = require('./Button')
 var PointsBar = require('./Points')
 
+function randomArray(size) {
+  var array = [];
+  var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  for (var i = 0; i < size; i++) {
+    var num = (Math.floor(Math.random()*colors.length));
+    array.push(colors[num]);
+  }
+  return array
+}
 
 class BoxShell extends React.Component {
   constructor() {
     super();
     this.state = {
-      boxes: Array(9).fill(null),
+      boxes: randomArray(9),
       points: 0,
     }
   }
@@ -16,13 +25,29 @@ class BoxShell extends React.Component {
   handleClick(i) {
     const boxes = this.state.boxes.slice();
     let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-    let curColor = colors.indexOf(boxes[i]);
-    if (curColor < 0) {
-      curColor = 0
-    } else {
-      curColor ++
+    let array;
+    if (i === "y3") {
+      array = [0, 1, 2]
+    } else if (i === "y2") {
+      array = [3, 4, 5]
+    } else if (i === "y1") {
+      array = [6, 7, 8]
+    } else if (i === "x1") {
+      array = [6, 3, 0]
+    } else if (i === "x2") {
+      array = [7, 4, 1]
+    } else if (i === "x3") {
+      array = [8, 5, 2]
     }
-    boxes[i] = colors[curColor];
+    array.forEach(function(i) {
+      let curColor = colors.indexOf(boxes[i]);
+      if (curColor === colors.length-1) {
+        curColor = 0
+      } else {
+        curColor ++
+      }
+      boxes[i] = colors[curColor]
+    });
     this.setState(
       {boxes: boxes},
       function() {this.calculatePoints()}
@@ -56,11 +81,12 @@ class BoxShell extends React.Component {
         <div id="leftButtonRow">
           <div className="ButtonShell">
             { [2, 1, 0].map(function(i) {
+              var node = "y"+(i+1);
               return (
                 <Button
                   key={i}
-                  node={"y"+(i+1)}
-                  onClick={()=>this.handleClick(i)}
+                  node={node}
+                  onClick={()=>this.handleClick(node)}
                   />
               )
             }.bind(this)) }
@@ -79,11 +105,12 @@ class BoxShell extends React.Component {
           <div id="bottomButtonRow">
             <div className="ButtonShell">
               { [0, 1, 2].map(function(i) {
+                var node = "x"+(i+1);
                 return (
                   <Button
                     key={i}
-                    node={"x"+(i+1)}
-                    onClick={()=>this.handleClick(i)}
+                    node={node}
+                    onClick={()=>this.handleClick(node)}
                     />
                 )
               }.bind(this))}
