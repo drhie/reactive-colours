@@ -5,16 +5,26 @@ class Box extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "o",
       backgroundColor: 'gray'
+    }
+  }
+
+  generateContent() {
+    let content;
+    if (this.props.star === this.props.value) {
+      return <i className="fa fa-star" aria-hidden="true"></i>
+    } else if (this.props.bomb === this.props.value) {
+      return <i className="fa fa-bomb" aria-hidden="true"></i>
+    } else {
+      return <i style={{color:this.props.value}} className="fa fa-heart" aria-hidden="true"/>
     }
   }
 
   render() {
     return (
-      <div className={this.props.animation} style={{background:this.props.value}}>
+      <div className={"Box "+this.props.animation} style={{background:this.props.value}}>
         <p>
-          {this.props.value || this.state.value}
+          {this.generateContent()}
         </p>
       </div>
     );

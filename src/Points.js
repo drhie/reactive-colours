@@ -5,7 +5,7 @@ var pointsBarStyle = {
   width: '80%',
   height: 100,
   margin: '20px auto',
-  'border-radius': 20
+  borderRadius: 20
 }
 
 class PointsBar extends React.Component {
@@ -13,6 +13,9 @@ class PointsBar extends React.Component {
     var points = 0;
     return (
       <div style={pointsBarStyle}>
+        <h2>This round</h2>
+        <p style={{background:this.props.star}}>Star Color: </p>
+        <p style={{background:this.props.bomb}}>Bomb Color: </p>
         <p>Points: {this.props.points}</p>
       </div>
     );

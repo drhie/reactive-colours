@@ -15,7 +15,7 @@ class App extends Component {
           <h2>React to the Colors of the Rainbow</h2>
         </div>
         <p className="App-intro">
-          Click on the boxes to change the colours. You will accumulate points as you go along.
+          Bank as many stars as possible, but there better not be any bombs in that bank, or it will cost you a life, points and time!
         </p>
         <BoxShell />
       </div>
