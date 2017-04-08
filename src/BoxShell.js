@@ -18,18 +18,23 @@ function randomArray(size) {
   return array
 }
 
+function generateStarBomb() {
+  const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'purple'];
+  var star = colors.sample();
+  colors.splice(colors.indexOf(star), 1);
+  var bomb = colors.sample();
+  return [star, bomb]
+}
+
 class BoxShell extends React.Component {
   constructor() {
-    const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'purple'];
-    var star = colors.sample();
-    colors.splice(colors.indexOf(star), 1);
-    var bomb = colors.sample();
     super();
+    var starBomb = generateStarBomb();
     this.state = {
       boxes: randomArray(16),
       points: 0,
-      star: star,
-      bomb: bomb
+      star: starBomb[0],
+      bomb: starBomb[1]
     }
   }
 
@@ -84,8 +89,13 @@ class BoxShell extends React.Component {
         points --
       }
     });
-    console.log(points)
-    this.setState({points: points})
+    var starBomb = generateStarBomb()
+    this.setState({
+      points: points,
+      boxes: randomArray(16),
+      star: starBomb[0],
+      bomb: starBomb[1]
+    })
   }
 
   calculatePoints(){
