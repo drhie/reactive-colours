@@ -12,7 +12,7 @@ class Box extends React.Component {
 
   render() {
     return (
-      <div className="Box" style={{background:this.props.value}}>
+      <div className={this.props.animation} style={{background:this.props.value}}>
         <p>
           {this.props.value || this.state.value}
         </p>

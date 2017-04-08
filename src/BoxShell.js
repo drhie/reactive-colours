@@ -19,6 +19,7 @@ class BoxShell extends React.Component {
     this.state = {
       boxes: randomArray(9),
       points: 0,
+      animation: "Box animated flipInY"
     }
   }
 
@@ -99,6 +100,7 @@ class BoxShell extends React.Component {
             return (
               <Box
                 key={i}
+                animation={this.state.animation}
                 value={this.state.boxes[i]}
               />
             )
