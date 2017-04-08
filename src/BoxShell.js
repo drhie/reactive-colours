@@ -3,17 +3,6 @@ var Box = require('./Box')
 var Button = require('./Button')
 var PointsBar = require('./Points')
 
-var boxShellStyles = {
-  width: 302,
-  height: 602,
-  display: 'inline-block'
-}
-
-
-var boxTextStyle = {
-  'vertical-align': 'middle',
-
-}
 
 class BoxShell extends React.Component {
   constructor() {
@@ -23,6 +12,7 @@ class BoxShell extends React.Component {
       points: 0,
     }
   }
+
   handleClick(i) {
     const boxes = this.state.boxes.slice();
     let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
@@ -44,14 +34,14 @@ class BoxShell extends React.Component {
     let mutualColor = 0;
     let boxColor;
     this.state.boxes.forEach(function (box, index) {
-      if (index == 0) {
+      if (index === 0) {
         boxColor = box
       }
-      if (box == boxColor) {
+      if (box === boxColor) {
         mutualColor ++
       }
     });
-    if (this.state.boxes.length == mutualColor) {
+    if (this.state.boxes.length === mutualColor) {
       // alert("All the colors match!");
       mutualColor = 0;
       points  += 20
@@ -70,9 +60,10 @@ class BoxShell extends React.Component {
                 <Button
                   key={i}
                   node={"y"+(i+1)}
+                  onClick={()=>this.handleClick(i)}
                   />
               )
-            })}
+            }.bind(this)) }
           </div>
         </div>
 
@@ -82,7 +73,6 @@ class BoxShell extends React.Component {
               <Box
                 key={i}
                 value={this.state.boxes[i]}
-                onClick={() => this.handleClick(i)}
               />
             )
           }.bind(this)) }
@@ -93,9 +83,10 @@ class BoxShell extends React.Component {
                   <Button
                     key={i}
                     node={"x"+(i+1)}
+                    onClick={()=>this.handleClick(i)}
                     />
                 )
-              })}
+              }.bind(this))}
             </div>
         </div>
 

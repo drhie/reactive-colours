@@ -1,9 +1,6 @@
 var React = require('react');
 // import './Box.css';
 
-var boxStyles = {
-}
-
 class Box extends React.Component {
   constructor() {
     super();
@@ -15,7 +12,7 @@ class Box extends React.Component {
 
   render() {
     return (
-      <div className="Box" style={{background:this.props.value}} onClick={() => { this.props.onClick() } }>
+      <div className="Box" style={{background:this.props.value}}>
         <p>
           {this.props.value || this.state.value}
         </p>
