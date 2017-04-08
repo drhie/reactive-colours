@@ -2,9 +2,9 @@ import React from 'react';
 
 function Button (props) {
     return (
-      <div className="Button" onClick={() => {props.onClick()} } >
-        <p>{props.node}</p>
-      </div>
+      <button className="Button" onClick={() => {props.onClick()} } >
+        <p><i className={props.type} aria-hidden="true"></i></p>
+      </button>
     )
 }
 

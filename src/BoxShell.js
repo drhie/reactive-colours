@@ -5,7 +5,7 @@ var PointsBar = require('./Points')
 
 function randomArray(size) {
   var array = [];
-  var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
   for (var i = 0; i < size; i++) {
     var num = (Math.floor(Math.random()*colors.length));
     array.push(colors[num]);
@@ -24,7 +24,7 @@ class BoxShell extends React.Component {
 
   handleClick(i) {
     const boxes = this.state.boxes.slice();
-    let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+    let colors = ['red', 'orange', 'yellow', 'green', 'blue'];
     let array;
     if (i === "y3") {
       array = [0, 1, 2]
@@ -85,6 +85,7 @@ class BoxShell extends React.Component {
               return (
                 <Button
                   key={i}
+                  type="fa fa-arrow-right"
                   node={node}
                   onClick={()=>this.handleClick(node)}
                   />
@@ -109,7 +110,7 @@ class BoxShell extends React.Component {
                 return (
                   <Button
                     key={i}
-                    node={node}
+                    type="fa fa-arrow-up"
                     onClick={()=>this.handleClick(node)}
                     />
                 )
