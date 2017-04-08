@@ -1,21 +1,40 @@
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
+#topbar {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  padding: 10px;
   color: white;
 }
 
+#title {
+  font-family: "Press Start 2P";
+  font-size: 2em;
+}
 .App-intro {
+  font-family: 'Inconsolata';
   font-size: large;
+  border-radius: 20px;
+  background: rgba(211, 211, 211, 0.9);
+  padding: 20px;
+}
+
+.Bank {
+  display: block;
+  margin: auto;
+  width: 100%;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid black;
+  margin-top: 10px;
+  font-family: "Press Start 2P"
+}
+
+.Bank:hover {
+  background: black;
+  color: white;
 }
 
 .BoxShell {
@@ -36,6 +55,11 @@
   box-shadow: 2px 2px 2px black;
 }
 
+.Box.status {
+  box-shadow: none;
+  border: none;
+}
+
 .Box p {
   margin: 0;
   display: flex;
@@ -46,12 +70,35 @@
 
 .Button {
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 50px;
   width: 50px;
   height: 50px;
   display: inline-block;
   background: white;
   /*margin: 10px;*/
+}
+
+.Button:hover {
+  color: white;
+  background: black;
+}
+
+.Timer {
+  text-align: center;
+  font-family: "Press Start 2P"
+}
+
+.heart i {
+  color: hotpink;
+  font-size: 2em;
+  padding: 2px;
+}
+
+#colorBoard {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 10px;
+  font-family: 'Press Start 2P'
 }
 
 #leftButtonRow {
@@ -76,19 +123,26 @@
 #gameContainer {
   padding: 20px;
   border-radius: 10px;
-  background: lightgray;
+  background: rgba(211, 211, 211, 0.7);
   /*width: 440px;*/
   display: inline-block;
-  width: 40%;
+  width: 49%;
+  margin-right: 5px;
 }
 
 #statContainer {
   display: inline-block;
-  width: 30%;
-  border: 1px solid black;
-  margin: 20px auto;
+  width: 44%;
+  background: rgba(211, 211, 211, 0.7);
+  margin-left: 5px;
   text-align: left;
   border-radius: 20px;
+  vertical-align: top;
+}
+
+#shell {
+  width: 750px;
+  display: inline-block;
 }
 
 .statusBar {

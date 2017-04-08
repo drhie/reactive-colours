@@ -1,29 +1,35 @@
 import React from 'react';
 
 class PointsBar extends React.Component {
+  livesCounter(lifeCount) {
+    var hearts=[]
+    for (let i=0; i < lifeCount; i ++) {
+      hearts.push(<span className="heart"><i className="fa fa-heart" aria-hidden="true" /></span>)
+    }
+    return hearts
+  }
   render() {
     var points = 0;
     return (
       <div className="statusBar">
-        <h2>This round</h2>
+        <p>{this.livesCounter(this.props.lives)}</p>
         <p>Points: {this.props.points}</p>
-        <p>Lives: {this.props.lives}</p>
-        <p>
-          <div className="Box" style={{background:this.props.star}}>
+        <div>
+          <div className="Box status" style={{background:this.props.star}}>
             <p>
               <i className="fa fa-star" />
             </p>
           </div>
           Stars (give you points!)
-        </p>
-        <p>
-          <div className="Box" style={{background:this.props.bomb}}>
+        </div>
+        <div>
+          <div className="Box status" style={{background:this.props.bomb}}>
             <p>
               <i className="fa fa-bomb" />
             </p>
           </div>
           Bombs (avoid these!)
-        </p>
+        </div>
       </div>
     );
   }

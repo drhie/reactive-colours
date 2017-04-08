@@ -10,15 +10,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React to the Colors of the Rainbow</h2>
+        <div id="topbar">
+          <h2 id="title">Reactive Colours</h2>
         </div>
-        <p className="App-intro">
-          Bank as many stars as possible, but there better not be any bombs in that bank, or it will cost you a life, points and time!
-          Don't understand how the boxes switch colours? Carefully study the order in which colours change. There is a very obvious pattern!
-        </p>
-        <BoxShell />
+        <div id="shell">
+          <p className="App-intro">
+            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and earn more time, but watch out! There better not be any bombs in there too, or it will cost you a life!
+          </p>
+          <BoxShell />
+        </div>
       </div>
     );
   }

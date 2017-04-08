@@ -55,9 +55,19 @@ class BoxShell extends React.Component {
   tick() {
     var timeLeft = this.state.timer;
     timeLeft --
+    if (timeLeft < 1) {
+      alert("Game over...");
+      timeLeft = 0;
+    }
     this.setState(
       {timer: timeLeft}
     )
+  }
+
+  handleKeyPress(e) {
+    if(e.charCode === 13) {
+      console.log("BANKED!")
+    }
   }
 
   handleClick(i) {
@@ -91,21 +101,19 @@ class BoxShell extends React.Component {
       boxes[i] = colors[curColor];
     });
     this.setState(
-      {boxes: boxes},
-      function() {
-        this.calculatePoints()
-      }
+      {boxes: boxes}
     );
   }
 
   handleBank() {
     console.log("Bank!");
     let points = this.state.points;
-    let bonusTime = 0;
     let star = this.state.star;
     let bomb = this.state.bomb;
     let lives = this.state.lives;
     let bombExists = false;
+    let bonusLife = 0;
+    let bonusTime = 0;
     let boxColor;
     this.state.boxes.forEach(function (box) {
       if (box === star) {
@@ -118,6 +126,7 @@ class BoxShell extends React.Component {
       }
     });
     if (points < 0) { points = 0 }
+    if (points-this.state.points > 10) { bonusLife ++ }
     if (bombExists) { lives -= 1 }
     var starBomb = generateStarBomb()
     this.setState({
@@ -125,7 +134,7 @@ class BoxShell extends React.Component {
       boxes: randomArray(16),
       star: starBomb[0],
       bomb: starBomb[1],
-      lives: lives,
+      lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
     })
   }
@@ -134,7 +143,7 @@ class BoxShell extends React.Component {
     return(
       <div>
         <div id="gameContainer">
-
+          <h2 id="colorBoard">COLOUR BOARD</h2>
           <div id="leftButtonRow">
             <div className="ButtonShell">
               { [3, 2, 1, 0].map(function(i) {
@@ -145,6 +154,7 @@ class BoxShell extends React.Component {
                     type="fa fa-arrow-right"
                     node={node}
                     onClick={()=>this.handleClick(node)}
+                    onKeyPress = {() =>this.handleKeyPress()}
                   />
                 )
               }.bind(this)) }
@@ -177,11 +187,11 @@ class BoxShell extends React.Component {
               </div>
             </div>
           </div>
-        </div>
-        <div id="statContainer">
           <Bank
             onBank={() =>this.handleBank()}
-          />
+            />
+        </div>
+        <div id="statContainer">
           <Timer timer={this.state.timer} />
           <PointsBar
             points={this.state.points}
