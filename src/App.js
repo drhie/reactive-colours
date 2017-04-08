@@ -16,6 +16,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
           Bank as many stars as possible, but there better not be any bombs in that bank, or it will cost you a life, points and time!
+          Don't understand how the boxes switch colours? Carefully study the order in which colours change. There is a very obvious pattern!
         </p>
         <BoxShell />
       </div>

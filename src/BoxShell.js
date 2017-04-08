@@ -2,6 +2,7 @@ var React = require('react')
 var Box = require('./Box')
 var Button = require('./Button')
 var PointsBar = require('./Points')
+var Bank = require('./Bank')
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -70,24 +71,24 @@ class BoxShell extends React.Component {
     );
   }
 
-  calculatePoints(){
+  handleBank() {
+    console.log("Bank!");
     let points = this.state.points;
-    let mutualColor = 0;
+    let star = this.state.star;
+    let bomb = this.state.bomb;
     let boxColor;
-    this.state.boxes.forEach(function (box, index) {
-      if (index === 0) {
-        boxColor = box
-      }
-      if (box === boxColor) {
-        mutualColor ++
+    this.state.boxes.forEach(function (box) {
+      if (box === star) {
+        points ++
+      } else if (box === bomb) {
+        points --
       }
     });
-    if (this.state.boxes.length === mutualColor) {
-      // alert("All the colors match!");
-      mutualColor = 0;
-      points  += 20
-    }
+    console.log(points)
     this.setState({points: points})
+  }
+
+  calculatePoints(){
   }
 
   render() {
@@ -104,7 +105,7 @@ class BoxShell extends React.Component {
                   type="fa fa-arrow-right"
                   node={node}
                   onClick={()=>this.handleClick(node)}
-                  />
+                />
               )
             }.bind(this)) }
           </div>
@@ -134,8 +135,7 @@ class BoxShell extends React.Component {
                 )
               }.bind(this))}
             </div>
-        </div>
-
+          </div>
         </div>
 
 
@@ -143,6 +143,9 @@ class BoxShell extends React.Component {
           points={this.state.points}
           star={this.state.star}
           bomb={this.state.bomb}
+        />
+        <Bank
+          onBank={() =>this.handleBank()}
         />
       </div>
     )

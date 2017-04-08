@@ -14,9 +14,9 @@ class PointsBar extends React.Component {
     return (
       <div style={pointsBarStyle}>
         <h2>This round</h2>
+        <p>Points: {this.props.points}</p>
         <p style={{background:this.props.star}}>Star Color: </p>
         <p style={{background:this.props.bomb}}>Bomb Color: </p>
-        <p>Points: {this.props.points}</p>
       </div>
     );
   }
