@@ -18,9 +18,14 @@
   font-size: large;
 }
 
+.BoxShell {
+  display: inline-block;
+  width: 300px;
+}
+
 .Box {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border: 1px solid black;
   display: inline-block;
   margin: 10px;
@@ -36,6 +41,38 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.Button {
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  /*margin: 10px;*/
+}
+
+#leftButtonRow {
+  width: 70px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#bottomButtonRow .Button {
+  margin: 10px;
+}
+
+#bottomButtonRow .ButtonShell {
+}
+
+#leftButtonRow .Button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#gameContainer {
+  width: 370px;
+  display: inline-block;
 }
 
 @keyframes App-logo-spin {
