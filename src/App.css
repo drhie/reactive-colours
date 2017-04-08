@@ -79,6 +79,20 @@
   background: lightgray;
   /*width: 440px;*/
   display: inline-block;
+  width: 40%;
+}
+
+#statContainer {
+  display: inline-block;
+  width: 30%;
+  border: 1px solid black;
+  margin: 20px auto;
+  text-align: left;
+  border-radius: 20px;
+}
+
+.statusBar {
+  padding: 0 20px;
 }
 
 @keyframes App-logo-spin {

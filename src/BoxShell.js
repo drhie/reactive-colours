@@ -3,6 +3,7 @@ var Box = require('./Box')
 var Button = require('./Button')
 var PointsBar = require('./Points')
 var Bank = require('./Bank')
+var Timer = require('./Timer')
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -34,8 +35,29 @@ class BoxShell extends React.Component {
       boxes: randomArray(16),
       points: 0,
       star: starBomb[0],
-      bomb: starBomb[1]
+      bomb: starBomb[1],
+      lives: 3,
+      timer: 60
     }
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    )
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    var timeLeft = this.state.timer;
+    timeLeft --
+    this.setState(
+      {timer: timeLeft}
+    )
   }
 
   handleClick(i) {
@@ -79,84 +101,95 @@ class BoxShell extends React.Component {
   handleBank() {
     console.log("Bank!");
     let points = this.state.points;
+    let bonusTime = 0;
     let star = this.state.star;
     let bomb = this.state.bomb;
+    let lives = this.state.lives;
+    let bombExists = false;
     let boxColor;
     this.state.boxes.forEach(function (box) {
       if (box === star) {
-        points ++
+        points ++;
+        bonusTime ++;
       } else if (box === bomb) {
-        points --
+        points --;
+        bonusTime --;
+        bombExists = true
       }
     });
+    if (points < 0) { points = 0 }
+    if (bombExists) { lives -= 1 }
     var starBomb = generateStarBomb()
     this.setState({
       points: points,
       boxes: randomArray(16),
       star: starBomb[0],
-      bomb: starBomb[1]
+      bomb: starBomb[1],
+      lives: lives,
+      timer: Math.floor(this.state.timer + bonusTime),
     })
-  }
-
-  calculatePoints(){
   }
 
   render() {
     return(
-      <div id="gameContainer">
+      <div>
+        <div id="gameContainer">
 
-        <div id="leftButtonRow">
-          <div className="ButtonShell">
-            { [3, 2, 1, 0].map(function(i) {
-              var node = "y"+(i+1);
-              return (
-                <Button
-                  key={i}
-                  type="fa fa-arrow-right"
-                  node={node}
-                  onClick={()=>this.handleClick(node)}
-                />
-              )
-            }.bind(this)) }
-          </div>
-        </div>
-
-        <div className="BoxShell">
-          { [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(function(i) {
-            return (
-              <Box
-                key={i}
-                value={this.state.boxes[i]}
-                star={this.state.star}
-                bomb={this.state.bomb}
-              />
-            )
-          }.bind(this)) }
-          <div id="bottomButtonRow">
+          <div id="leftButtonRow">
             <div className="ButtonShell">
-              { [0, 1, 2, 3].map(function(i) {
-                var node = "x"+(i+1);
+              { [3, 2, 1, 0].map(function(i) {
+                var node = "y"+(i+1);
                 return (
                   <Button
                     key={i}
-                    type="fa fa-arrow-up"
+                    type="fa fa-arrow-right"
+                    node={node}
                     onClick={()=>this.handleClick(node)}
-                    />
+                  />
                 )
-              }.bind(this))}
+              }.bind(this)) }
+            </div>
+          </div>
+
+          <div className="BoxShell">
+            { [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(function(i) {
+              return (
+                <Box
+                  key={i}
+                  value={this.state.boxes[i]}
+                  star={this.state.star}
+                  bomb={this.state.bomb}
+                />
+              )
+            }.bind(this)) }
+            <div id="bottomButtonRow">
+              <div className="ButtonShell">
+                { [0, 1, 2, 3].map(function(i) {
+                  var node = "x"+(i+1);
+                  return (
+                    <Button
+                      key={i}
+                      type="fa fa-arrow-up"
+                      onClick={()=>this.handleClick(node)}
+                      />
+                  )
+                }.bind(this))}
+              </div>
             </div>
           </div>
         </div>
-
-
-        <PointsBar
-          points={this.state.points}
-          star={this.state.star}
-          bomb={this.state.bomb}
-        />
-        <Bank
-          onBank={() =>this.handleBank()}
-        />
+        <div id="statContainer">
+          <Bank
+            onBank={() =>this.handleBank()}
+          />
+          <Timer timer={this.state.timer} />
+          <PointsBar
+            points={this.state.points}
+            star={this.state.star}
+            bomb={this.state.bomb}
+            lives={this.state.lives}
+          />
+        </div>
       </div>
     )
   }
