@@ -11,16 +11,15 @@ class PointsBar extends React.Component {
   render() {
     var points = 0;
     return (
-      <div className="statusBar">
-        <p>{this.livesCounter(this.props.lives)}</p>
-        <p>Points: {this.props.points}</p>
+      <div>
+        <p className="statusBar">{this.livesCounter(this.props.lives)}</p>
         <div>
           <div className="Box status" style={{background:this.props.star}}>
             <p>
               <i className="fa fa-star" />
             </p>
           </div>
-          Stars (give you points!)
+          Stars (the more the better!)
         </div>
         <div>
           <div className="Box status" style={{background:this.props.bomb}}>

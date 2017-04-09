@@ -3,7 +3,8 @@ import React from 'react';
 function Timer (props) {
   return (
     <div className="Timer">
-      <h1>{props.timer}</h1>
+      <h2 id="timer-heading">TIME:</h2>
+      <h1 id="timer-count" style={{color:props.urgent}}>{props.timer}</h1>
     </div>
   )
 }

@@ -4,6 +4,7 @@ var Button = require('./Button')
 var PointsBar = require('./Points')
 var Bank = require('./Bank')
 var Timer = require('./Timer')
+var Score = require('./Score')
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -37,7 +38,8 @@ class BoxShell extends React.Component {
       star: starBomb[0],
       bomb: starBomb[1],
       lives: 3,
-      timer: 60
+      timer: 60,
+      urgent: 'black'
     }
   }
 
@@ -55,6 +57,9 @@ class BoxShell extends React.Component {
   tick() {
     var timeLeft = this.state.timer;
     timeLeft --
+    if (timeLeft < 11) {
+      this.setState({urgent: 'red'})
+    }
     if (timeLeft < 1) {
       alert("Game over...");
       timeLeft = 0;
@@ -126,9 +131,12 @@ class BoxShell extends React.Component {
       }
     });
     if (points < 0) { points = 0 }
-    if (points-this.state.points > 10) { bonusLife ++ }
+    if (points-this.state.points > 9) { bonusLife ++ }
     if (bombExists) { lives -= 1 }
     var starBomb = generateStarBomb()
+    if (this.state.timer + bonusTime > 10) {
+      this.setState({urgent: 'black'})
+    }
     this.setState({
       points: points,
       boxes: randomArray(16),
@@ -191,14 +199,20 @@ class BoxShell extends React.Component {
             onBank={() =>this.handleBank()}
             />
         </div>
-        <div id="statContainer">
-          <Timer timer={this.state.timer} />
-          <PointsBar
-            points={this.state.points}
-            star={this.state.star}
-            bomb={this.state.bomb}
-            lives={this.state.lives}
-          />
+        <div id="rightDiv">
+          <div id="statContainer">
+            <Timer
+              timer={this.state.timer}
+              urgent={this.state.urgent}/>
+            <PointsBar
+              star={this.state.star}
+              bomb={this.state.bomb}
+              lives={this.state.lives}
+            />
+          </div>
+          <div id="scoreContainer">
+            <Score score={this.state.points} />
+          </div>
         </div>
       </div>
     )

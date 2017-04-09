@@ -12,10 +12,12 @@ class App extends Component {
       <div className="App">
         <div id="topbar">
           <h2 id="title">Reactive Colours</h2>
+          <p>This is a David Rhie web app</p>
         </div>
         <div id="shell">
           <p className="App-intro">
-            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and earn more time, but watch out! There better not be any bombs in there too, or it will cost you a life!
+            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and earn more time, but watch out! There better not be any bombs on there when you bank, or it will cost you a life!
+            If the timer goes to zero, it's game over!
           </p>
           <BoxShell />
         </div>
