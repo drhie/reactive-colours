@@ -5,6 +5,7 @@ var PointsBar = require('./Points')
 var Bank = require('./Bank')
 var Timer = require('./Timer')
 var Score = require('./Score')
+var Start = require('./Start')
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -38,8 +39,8 @@ class BoxShell extends React.Component {
       star: starBomb[0],
       bomb: starBomb[1],
       lives: 3,
-      timer: 60,
-      urgent: 'black'
+      urgent: 'black',
+      gameStart: false
     }
   }
 
@@ -61,8 +62,11 @@ class BoxShell extends React.Component {
       this.setState({urgent: 'red'})
     }
     if (timeLeft < 1) {
-      alert("Game over...");
       timeLeft = 0;
+      this.setState({
+        gameStart: false,
+        urgent: 'black'
+      })
     }
     this.setState(
       {timer: timeLeft}
@@ -137,6 +141,9 @@ class BoxShell extends React.Component {
     if (this.state.timer + bonusTime > 10) {
       this.setState({urgent: 'black'})
     }
+    if (lives === 0) {
+
+    }
     this.setState({
       points: points,
       boxes: randomArray(16),
@@ -147,7 +154,38 @@ class BoxShell extends React.Component {
     })
   }
 
+  handleStart() {
+    this.setState({
+      gameStart: true,
+      boxes: randomArray(16),
+      timer: 60
+    })
+  }
+
   render() {
+    var statusBarToggle;
+    var bankButtonToggle;
+    var scoreToggle;
+    if(this.state.gameStart) {
+      statusBarToggle = <div>
+        <Timer
+          timer={this.state.timer}
+          urgent={this.state.urgent}/>
+        <PointsBar
+          star={this.state.star}
+          bomb={this.state.bomb}
+          lives={this.state.lives}
+          />
+      </div>;
+      bankButtonToggle = <Bank onBank={() =>this.handleBank()} />
+      scoreToggle = <div id="scoreContainer">
+                  <Score score={this.state.points} />
+                </div>
+
+    } else {
+      statusBarToggle = <Start
+        onClick={()=>this.handleStart()}/>
+    }
     return(
       <div>
         <div id="gameContainer">
@@ -195,24 +233,13 @@ class BoxShell extends React.Component {
               </div>
             </div>
           </div>
-          <Bank
-            onBank={() =>this.handleBank()}
-            />
+          {bankButtonToggle}
         </div>
         <div id="rightDiv">
           <div id="statContainer">
-            <Timer
-              timer={this.state.timer}
-              urgent={this.state.urgent}/>
-            <PointsBar
-              star={this.state.star}
-              bomb={this.state.bomb}
-              lives={this.state.lives}
-            />
+            {statusBarToggle}
           </div>
-          <div id="scoreContainer">
-            <Score score={this.state.points} />
-          </div>
+          {scoreToggle}
         </div>
       </div>
     )
