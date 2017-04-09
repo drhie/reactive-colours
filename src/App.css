@@ -86,6 +86,20 @@
   background: black;
 }
 
+.Button.status {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  position: relative;
+  margin-right: 10px;
+}
+
+.Button.status i {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+}
+
 .Timer {
   text-align: center;
   font-family: "Press Start 2P"
@@ -95,6 +109,26 @@
   color: hotpink;
   font-size: 2em;
   padding: 2px;
+}
+
+.diagram {
+  width: 33px;
+  display: inline-block;
+  margin-right: 10px
+}
+
+.arrow {
+  width: 85%;
+  vertical-align: top;
+}
+
+.instructions {
+  display: inline-block;
+  margin: 0;
+}
+
+.instructionSection {
+  padding: 6px 0;
 }
 
 #colorBoard, #timer-heading {

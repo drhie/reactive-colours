@@ -35,9 +35,9 @@ class BoxShell extends React.Component {
     var starBomb = generateStarBomb();
     this.state = {
       boxes: randomArray(16),
-      points: 0,
       star: starBomb[0],
       bomb: starBomb[1],
+      points: 0,
       lives: 3,
       urgent: 'black',
       gameStart: false
@@ -63,10 +63,7 @@ class BoxShell extends React.Component {
     }
     if (timeLeft < 1) {
       timeLeft = 0;
-      this.setState({
-        gameStart: false,
-        urgent: 'black'
-      })
+      this.gameReset()
     }
     this.setState(
       {timer: timeLeft}
@@ -77,6 +74,15 @@ class BoxShell extends React.Component {
     if(e.charCode === 13) {
       console.log("BANKED!")
     }
+  }
+
+  gameReset() {
+    this.setState({
+      points: 0,
+      lives: 3,
+      urgent: 'black',
+      gameStart: false
+    })
   }
 
   handleClick(i) {
@@ -141,9 +147,6 @@ class BoxShell extends React.Component {
     if (this.state.timer + bonusTime > 10) {
       this.setState({urgent: 'black'})
     }
-    if (lives === 0) {
-
-    }
     this.setState({
       points: points,
       boxes: randomArray(16),
@@ -152,13 +155,17 @@ class BoxShell extends React.Component {
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
     })
+    if (lives <= 0) {
+      this.gameReset()
+    }
   }
 
   handleStart() {
     this.setState({
       gameStart: true,
       boxes: randomArray(16),
-      timer: 60
+      timer: 60,
+      points: 0
     })
   }
 

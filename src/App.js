@@ -16,7 +16,7 @@ class App extends Component {
         </div>
         <div id="shell">
           <p className="App-intro">
-            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and earn more time, but watch out: There better not be any bombs on there when you bank, or you'll be sorry!
+            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and extra time, but watch out: There better not be any bombs on there when you bank, or you'll be sorry!
           </p>
           <BoxShell />
         </div>
