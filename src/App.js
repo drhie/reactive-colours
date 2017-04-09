@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 // var ReactDOM = require('react-dom')
 
 var BoxShell = require('./BoxShell')
-var PointsBar = require('./Points')
 
 class App extends Component {
   render() {
@@ -16,7 +14,7 @@ class App extends Component {
         </div>
         <div id="shell">
           <p className="App-intro">
-            <strong>Instructions:</strong> Use the controls to fill the colour board with as many stars as possible. Bank the stars to collect points and extra time, but watch out: There better not be any bombs on there when you bank, or you'll be sorry!
+            <strong>REACTIVE COLOURS</strong> is a simple puzzle game where you rack up your score by collecting as many stars on the board as possible while avoiding the bombs.
           </p>
           <BoxShell />
         </div>

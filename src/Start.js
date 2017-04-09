@@ -42,10 +42,10 @@ class Start extends React.Component {
                 <p><i className="fa fa-arrow-up" aria-hidden="true" /></p>
               </div>
             </div>
-            <p className="arrow instructions">Use the arrow keys to change the corresponding row of boxes. You can also press the number keys 1 to 4 and 5 to 8.</p>
+            <p className="arrow instructions">Use the arrow buttons to change the corresponding row of squares. All squares on the selected row will change colours.</p>
           </div>
           <div className="instructionSection">
-            <p className="instructions"><strong>BANK</strong> the stars <i className="fa fa-star"/> on the board to increase your score and time. But if a bomb <i className="fa fa-bomb" /> is on the board too, you will lose 1 life, and your time and score will drop.</p>
+            <p className="instructions"><strong>BANK</strong> the stars <i className="fa fa-star"/> on the board to increase your score and time. But if you <strong>BANK</strong> when there's a bomb <i className="fa fa-bomb" /> on the board too, you will lose 1 life, and your time and score will drop.</p>
           </div>
           <div className="instructionSection">
             <p className="instructions">The game is over when you either lose all of your lives or run out of time.</p>

@@ -1,11 +1,11 @@
-var React = require('react')
-var Box = require('./Box')
-var Button = require('./Button')
-var PointsBar = require('./Points')
-var Bank = require('./Bank')
-var Timer = require('./Timer')
-var Score = require('./Score')
-var Start = require('./Start')
+var React = require('react');
+var Box = require('./Box');
+var Button = require('./Button');
+var PointsBar = require('./Points');
+var Bank = require('./Bank');
+var Timer = require('./Timer');
+var Score = require('./Score');
+var Start = require('./Start');
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -40,9 +40,11 @@ class BoxShell extends React.Component {
       points: 0,
       lives: 3,
       urgent: 'black',
-      gameStart: false
+      gameStart: false,
+      animations: []
     }
   }
+
 
   componentDidMount() {
     this.timerID = setInterval(
@@ -68,12 +70,6 @@ class BoxShell extends React.Component {
     this.setState(
       {timer: timeLeft}
     )
-  }
-
-  handleKeyPress(e) {
-    if(e.charCode === 13) {
-      console.log("BANKED!")
-    }
   }
 
   gameReset() {
@@ -121,7 +117,7 @@ class BoxShell extends React.Component {
   }
 
   handleBank() {
-    console.log("Bank!");
+    const animations = Array(16);
     let points = this.state.points;
     let star = this.state.star;
     let bomb = this.state.bomb;
@@ -129,9 +125,9 @@ class BoxShell extends React.Component {
     let bombExists = false;
     let bonusLife = 0;
     let bonusTime = 0;
-    let boxColor;
-    this.state.boxes.forEach(function (box) {
+    this.state.boxes.forEach(function (box, i) {
       if (box === star) {
+        animations[i] = "animated flipInY";
         points ++;
         bonusTime ++;
       } else if (box === bomb) {
@@ -147,6 +143,7 @@ class BoxShell extends React.Component {
     if (this.state.timer + bonusTime > 10) {
       this.setState({urgent: 'black'})
     }
+    // this.setState({animations: animations})
     this.setState({
       points: points,
       boxes: randomArray(16),
@@ -207,7 +204,6 @@ class BoxShell extends React.Component {
                     type="fa fa-arrow-right"
                     node={node}
                     onClick={()=>this.handleClick(node)}
-                    onKeyPress = {() =>this.handleKeyPress()}
                   />
                 )
               }.bind(this)) }
@@ -222,6 +218,7 @@ class BoxShell extends React.Component {
                   value={this.state.boxes[i]}
                   star={this.state.star}
                   bomb={this.state.bomb}
+                  animation={this.state.animations[i]}
                 />
               )
             }.bind(this)) }
@@ -251,6 +248,7 @@ class BoxShell extends React.Component {
       </div>
     )
   }
+
 }
 
 module.exports = BoxShell

@@ -1,5 +1,4 @@
 var React = require('react');
-// import './Box.css';
 
 class Box extends React.Component {
   constructor() {
@@ -10,7 +9,6 @@ class Box extends React.Component {
   }
 
   generateContent() {
-    let content;
     if (this.props.star === this.props.value) {
       return <i className="fa fa-star" aria-hidden="true"></i>
     } else if (this.props.bomb === this.props.value) {
@@ -22,7 +20,7 @@ class Box extends React.Component {
 
   render() {
     return (
-      <div className={"Box "+this.props.animation} style={{background:this.props.value}}>
+      <div className={"Box " +this.props.animation} style={{background:this.props.value}}>
         <p>
           {this.generateContent()}
         </p>

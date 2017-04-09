@@ -9,7 +9,6 @@ class PointsBar extends React.Component {
     return hearts
   }
   render() {
-    var points = 0;
     return (
       <div>
         <p className="statusBar">{this.livesCounter(this.props.lives)}</p>
