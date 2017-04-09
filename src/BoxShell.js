@@ -6,6 +6,7 @@ var Bank = require('./Bank');
 var Timer = require('./Timer');
 var Score = require('./Score');
 var Start = require('./Start');
+import axios from 'axios';
 
 Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
@@ -52,6 +53,13 @@ class BoxShell extends React.Component {
       () => this.tick(),
       1000
     )
+    // axios.get('http://f0fe64d0.ngrok.io/scores.json', 'json')
+    // .then(function(response) {
+    //   console.log(response);
+    // })
+    // .catch(function(error) {
+    //   console.log(error);
+    // })
   }
 
   componentWillUnmount() {
@@ -64,23 +72,12 @@ class BoxShell extends React.Component {
     if (timeLeft < 11) {
       this.setState({urgent: 'red'})
     }
-    if (timeLeft < 1) {
-      timeLeft = 0;
+    if (timeLeft === 0) {
       this.gameReset()
     }
     this.setState(
       {timer: timeLeft}
     )
-  }
-
-  gameReset() {
-    this.setState({
-      lives: 3,
-      urgent: 'black',
-      gameStart: false,
-      gameOver: true,
-      timer: 60
-    })
   }
 
   handleClick(i) {
@@ -159,22 +156,34 @@ class BoxShell extends React.Component {
     }
   }
 
+  gameReset() {
+    this.setState({
+      lives: 3,
+      urgent: 'black',
+      gameStart: false,
+      gameOver: true,
+    })
+  }
+
   handleStart() {
     this.setState({
       gameStart: true,
+      gameOver: false,
       boxes: randomArray(16),
       timer: 60,
       points: 0
     })
   }
 
+  handleKeyDown(event) {
+    if (event.keyCode === 37) {
+      alert('It worked!!')
+    }
+  }
+
   handleReplay() {
     this.gameReset();
-    this.setState({
-      points: 0,
-      gameStart: true,
-      gameOver: false
-    })
+    this.handleStart();
   }
 
   handleMainMenu() {
@@ -182,7 +191,8 @@ class BoxShell extends React.Component {
     this.setState({
       points: 0,
       gameStart: false,
-      gameOver: false
+      gameOver: false,
+      timer: -1
     })
   }
 
@@ -202,7 +212,10 @@ class BoxShell extends React.Component {
           lives={this.state.lives}
           />
       </div>;
-      bankButtonToggle = <Bank onBank={() =>this.handleBank()} />
+      bankButtonToggle =
+      <Bank
+        onBank={() =>this.handleBank()}
+        handleKeyDown={()=>this.handleKeyDown(event)}/>
       scoreToggle = <div id="scoreContainer">
                   <Score score={this.state.points} />
                 </div>
@@ -275,10 +288,10 @@ class BoxShell extends React.Component {
         <div id="gameContainer">
           <h1>GAME OVER</h1>
           <h3 id="score-heading">YOUR SCORE: {this.state.points}</h3>
-          <button className="Start Bank" onClick={()=>this.handleReplay()}>
+          <button className="Bank" onClick={()=>this.handleReplay()}>
             <h2 id="start-heading">Play Again</h2>
           </button>
-          <button className="Start Bank" onClick={()=>this.handleMainMenu()}>
+          <button className="Bank" onClick={()=>this.handleMainMenu()}>
             <h2 id="start-heading">Main Menu</h2>
           </button>
         </div>

@@ -4,6 +4,7 @@ import App from './App';
 import './index.css';
 
 
+document.getElementById('gameOver').play();
 
 ReactDOM.render(
   <App />,

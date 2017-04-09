@@ -25,12 +25,12 @@
 .Bank {
   display: block;
   margin: auto;
-  width: 100%;
   border-radius: 50px;
   background: rgba(255,255,255,0.5);
   border: 1px solid gray;
   margin-top: 10px;
-  font-family: "Press Start 2P"
+  font-family: "Press Start 2P";
+  width: 85%;
 }
 
 .Bank:hover {
@@ -38,9 +38,10 @@
   color: white;
 }
 
+
 .BoxShell {
   display: inline-block;
-  width: 250px;
+  width: 70%;
 }
 
 .Box {
@@ -140,7 +141,7 @@
 
 #leftButtonRow {
   width: 50px;
-  padding-right: 10px;
+  /*padding-right: 10px;*/
   display: inline-block;
   vertical-align: top;
 }
@@ -159,12 +160,12 @@
 }
 
 #gameContainer {
-  padding: 20px;
+  padding: 20px 0px;
   border-radius: 20px;
   background: rgba(211, 211, 211, 0.85);
   /*width: 440px;*/
   display: inline-block;
-  width: 47%;
+  width: 52%;
   margin-right: 10px;
 }
 
@@ -207,6 +208,10 @@
 
 .statusBar {
   /*padding: 0 20px;*/
+}
+
+.Start {
+  width: 100%;
 }
 
 @keyframes App-logo-spin {
