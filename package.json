@@ -1,5 +1,6 @@
 {
-  "name": "game-ava",
+  "homepage": "http://drhie.github.io/reactive-colours",
+  "name": "reactive-colours",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
