@@ -41,7 +41,8 @@ class BoxShell extends React.Component {
       lives: 3,
       urgent: 'black',
       gameStart: false,
-      animations: []
+      gameOver: false,
+      animations: [],
     }
   }
 
@@ -74,10 +75,11 @@ class BoxShell extends React.Component {
 
   gameReset() {
     this.setState({
-      points: 0,
       lives: 3,
       urgent: 'black',
-      gameStart: false
+      gameStart: false,
+      gameOver: true,
+      timer: 60
     })
   }
 
@@ -166,10 +168,29 @@ class BoxShell extends React.Component {
     })
   }
 
+  handleReplay() {
+    this.gameReset();
+    this.setState({
+      points: 0,
+      gameStart: true,
+      gameOver: false
+    })
+  }
+
+  handleMainMenu() {
+    this.gameReset();
+    this.setState({
+      points: 0,
+      gameStart: false,
+      gameOver: false
+    })
+  }
+
   render() {
     var statusBarToggle;
     var bankButtonToggle;
     var scoreToggle;
+    var gameOverToggle;
     if(this.state.gameStart) {
       statusBarToggle = <div>
         <Timer
@@ -190,61 +211,82 @@ class BoxShell extends React.Component {
       statusBarToggle = <Start
         onClick={()=>this.handleStart()}/>
     }
-    return(
-      <div>
-        <div id="gameContainer">
-          <h2 id="colorBoard">COLOUR BOARD</h2>
-          <div id="leftButtonRow">
-            <div className="ButtonShell">
-              { [3, 2, 1, 0].map(function(i) {
-                var node = "y"+(i+1);
-                return (
-                  <Button
-                    key={i}
-                    type="fa fa-arrow-right"
-                    node={node}
-                    onClick={()=>this.handleClick(node)}
-                  />
-                )
-              }.bind(this)) }
-            </div>
-          </div>
-
-          <div className="BoxShell">
-            { [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(function(i) {
-              return (
-                <Box
-                  key={i}
-                  value={this.state.boxes[i]}
-                  star={this.state.star}
-                  bomb={this.state.bomb}
-                  animation={this.state.animations[i]}
-                />
-              )
-            }.bind(this)) }
-            <div id="bottomButtonRow">
+    if (!this.state.gameOver) {
+      gameOverToggle = (
+        <div>
+          <div id="gameContainer">
+            <h2 id="colorBoard">COLOUR BOARD</h2>
+            <div id="leftButtonRow">
               <div className="ButtonShell">
-                { [0, 1, 2, 3].map(function(i) {
-                  var node = "x"+(i+1);
+                { [3, 2, 1, 0].map(function(i) {
+                  var node = "y"+(i+1);
                   return (
                     <Button
                       key={i}
-                      type="fa fa-arrow-up"
+                      type="fa fa-arrow-right"
+                      node={node}
                       onClick={()=>this.handleClick(node)}
-                      />
+                      onKeyDown={()=>this.handleClick(node)}
+                    />
                   )
-                }.bind(this))}
+                }.bind(this)) }
               </div>
             </div>
+
+            <div className="BoxShell">
+              { [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(function(i) {
+                return (
+                  <Box
+                    key={i}
+                    value={this.state.boxes[i]}
+                    star={this.state.star}
+                    bomb={this.state.bomb}
+                    animation={this.state.animations[i]}
+                  />
+                )
+              }.bind(this)) }
+              <div id="bottomButtonRow">
+                <div className="ButtonShell">
+                  { [0, 1, 2, 3].map(function(i) {
+                    var node = "x"+(i+1);
+                    return (
+                      <Button
+                        key={i}
+                        type="fa fa-arrow-up"
+                        onClick={()=>this.handleClick(node)}
+                        />
+                    )
+                  }.bind(this))}
+                </div>
+              </div>
+            </div>
+            {bankButtonToggle}
           </div>
-          {bankButtonToggle}
-        </div>
-        <div id="rightDiv">
-          <div id="statContainer">
-            {statusBarToggle}
+          <div id="rightDiv">
+            <div id="statContainer">
+              {statusBarToggle}
+            </div>
+            {scoreToggle}
           </div>
-          {scoreToggle}
         </div>
+      )
+    } else {
+      gameOverToggle = (
+        <div id="gameContainer">
+          <h1>GAME OVER</h1>
+          <h3 id="score-heading">YOUR SCORE: {this.state.points}</h3>
+          <button className="Start Bank" onClick={()=>this.handleReplay()}>
+            <h2 id="start-heading">Play Again</h2>
+          </button>
+          <button className="Start Bank" onClick={()=>this.handleMainMenu()}>
+            <h2 id="start-heading">Main Menu</h2>
+          </button>
+        </div>
+      )
+    }
+    return(
+      <div>
+        {gameOverToggle}
       </div>
     )
   }
