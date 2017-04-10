@@ -207,7 +207,8 @@
 }
 
 .statusBar {
-  /*padding: 0 20px;*/
+  margin: 20px 0;
+  height: 36px;
 }
 
 .Start {

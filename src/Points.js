@@ -11,7 +11,9 @@ class PointsBar extends React.Component {
   render() {
     return (
       <div>
-        <p className="statusBar">{this.livesCounter(this.props.lives)}</p>
+        <div className="statusBar">
+          {this.livesCounter(this.props.lives-1)}
+        </div>
         <div>
           <div className="Box status" style={{background:this.props.star}}>
             <p>
