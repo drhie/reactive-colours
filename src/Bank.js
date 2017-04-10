@@ -4,9 +4,9 @@ function Bank (props) {
   return (
     <button
       id="bankButton"
-      tabIndex="0"
       className="Bank"
       onClick={()=>{props.onBank()}}
+      tabIndex="0"
       onKeyDown={props.handleKeyDown}
       >
       <h2>Bank!</h2>

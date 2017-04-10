@@ -12,6 +12,8 @@ Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
 }
 
+
+
 function randomArray(size) {
   var array = [];
   var colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'mediumpurple'];
@@ -53,13 +55,13 @@ class BoxShell extends React.Component {
       () => this.tick(),
       1000
     )
-    // axios.get('http://f0fe64d0.ngrok.io/scores.json', 'json')
-    // .then(function(response) {
-    //   console.log(response);
-    // })
-    // .catch(function(error) {
-    //   console.log(error);
-    // })
+    axios.get('http://localhost:3000/scores.json', 'json')
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
   }
 
   componentWillUnmount() {
