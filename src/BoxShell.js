@@ -178,6 +178,7 @@ class BoxShell extends React.Component {
       gameStart: true,
       gameOver: false,
       boxes: randomArray(16),
+      urgent: 'black',
       timer: 60,
       points: 0
     })
