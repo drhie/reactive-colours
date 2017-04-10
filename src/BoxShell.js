@@ -142,18 +142,26 @@ class BoxShell extends React.Component {
     if (this.state.timer + bonusTime > 10) {
       this.setState({urgent: 'black'})
     }
-    // this.setState({animations: animations})
     this.setState({
+      animations: animations,
       points: points,
       boxes: randomArray(16),
       star: starBomb[0],
       bomb: starBomb[1],
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
-    })
+    });
+    this.resetAnimation();
     if (lives <= 0) {
       this.gameReset()
     }
+  }
+
+  resetAnimation() {
+    console.log(this.state.gameOver);
+    setTimeout(()=>{this.setState({
+      animations: Array(16).fill(""),
+    })}, 1000);
   }
 
   gameReset() {
