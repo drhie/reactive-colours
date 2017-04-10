@@ -14,7 +14,7 @@ Array.prototype.sample = function(){
 
 function randomArray(size) {
   var array = [];
-  var colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'purple'];
+  var colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'mediumpurple'];
   for (var i = 0; i < size; i++) {
     var num = (Math.floor(Math.random()*colors.length));
     array.push(colors[num]);
@@ -23,7 +23,7 @@ function randomArray(size) {
 }
 
 function generateStarBomb() {
-  const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'purple'];
+  const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'mediumpurple'];
   var star = colors.sample();
   colors.splice(colors.indexOf(star), 1);
   var bomb = colors.sample();
@@ -81,7 +81,7 @@ class BoxShell extends React.Component {
   }
 
   handleClick(i) {
-    const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'purple'];
+    const colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'mediumpurple'];
     const boxes = this.state.boxes.slice();
     let array;
     if (i === "y4") {

@@ -24,18 +24,6 @@ class Start extends React.Component {
     } else {
       toggleStart =
         <div>
-          <div className="instructionSection">
-            <p className="instructions">The colours on the <strong>Colour Board</strong> will always change in a rainbow sequence.</p>
-            <div style={{display:'flex', justifyContent: 'space-between'}}>
-              <div className="Box status" style={{background:'red'}} />
-              <div className="Box status" style={{background:'orange'}} />
-              <div className="Box status" style={{background:'yellow'}} />
-              <div className="Box status" style={{background:'green'}} />
-              <div className="Box status" style={{background:'steelblue'}} />
-              <div className="Box status" style={{background:'purple'}} />
-            </div>
-
-        </div>
           <div className="instructionSection" style={{display:'inline-block'}}>
             <div className="diagram">
               <div className="Button status">
@@ -46,6 +34,17 @@ class Start extends React.Component {
               </div>
             </div>
             <p className="arrow instructions">Use the arrow buttons to change the corresponding row of squares. All squares on that row will change colours.</p>
+          </div>
+          <div className="instructionSection">
+            <p className="instructions">The colours on the <strong>Colour Board</strong> will always change in a rainbow sequence.</p>
+            <div style={{display:'flex', justifyContent: 'space-between'}}>
+              <div className="Box status" style={{background:'red'}} />
+              <div className="Box status" style={{background:'orange'}} />
+              <div className="Box status" style={{background:'yellow'}} />
+              <div className="Box status" style={{background:'green'}} />
+              <div className="Box status" style={{background:'steelblue'}} />
+              <div className="Box status" style={{background:'mediumpurple'}} />
+            </div>
           </div>
           <div className="instructionSection">
             <p className="instructions"><strong>BANK</strong> the stars <i className="fa fa-star"/> on the board to increase your score and time. But if you <strong>BANK</strong> when there's a bomb <i className="fa fa-bomb" /> on the board too, you will lose 1 life, and your time and score will drop.</p>

@@ -72,6 +72,10 @@
   height: 100%;
 }
 
+.Box p i {
+  font-size: 1.5em;
+}
+
 .Button {
   border: 1px solid gray;
   border-radius: 50px;
