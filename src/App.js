@@ -10,12 +10,10 @@ class App extends Component {
       <div className="App">
         <div id="topbar">
           <h2 id="title">REACTIVE COLOURS</h2>
-          <p>This is a David Rhie web app</p>
         </div>
         <div id="shell">
           <p className="App-intro">
-            <strong>REACTIVE COLOURS</strong> is a simple puzzle game where you build your score by collecting as many stars on the board as possible while avoiding the bombs.
-            <br /><em>(This app was built using React.js, a front-end Javascript framework)</em>
+            Rack up the highest score by collecting as many stars on the board as you can before time runs out, but don't collect bombs, or you'll be sorry!
           </p>
           <BoxShell />
         </div>

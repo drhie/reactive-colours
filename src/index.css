@@ -10,3 +10,34 @@ body {
 h1 {
   font-family: 'Press Start 2P'
 }
+
+#site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1
+}
+
+footer {
+  font-size: 0.8em;
+  font-family: "Press Start 2P";
+  background: black;
+  color: white;
+  text-align: right;
+  padding: 10px 20px;
+}
+
+footer p {
+  display: inline-block;
+}
+
+footer p:first-child {
+  float: left;
+}
+
+footer p:last-child {
+  float: right;
+}
