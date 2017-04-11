@@ -63,7 +63,7 @@ class BoxShell extends React.Component {
     axios({
       method: 'get',
       dataType: 'json',
-      url: 'http://reactive-colours.herokuapp.com/scores',
+      url: 'https://reactive-colours.herokuapp.com/scores',
     })
     .then(function(response) {
       response.data.forEach(function(object) {
@@ -184,7 +184,7 @@ class BoxShell extends React.Component {
     axios({
       method: 'post',
       dataType: 'json',
-      url: 'http://reactive-colours.herokuapp.com/scores',
+      url: 'https://reactive-colours.herokuapp.com/scores',
       data: {
         'score': {
           'points': points
