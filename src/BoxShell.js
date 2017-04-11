@@ -192,10 +192,10 @@ class BoxShell extends React.Component {
       }
     })
     .then(function(response) {
-      console.log(response);
+      // console.log(response);
     })
     .catch(function(response) {
-      console.log(response);
+      // console.log(response);
     })
     this.setState({
       lives: 3,
