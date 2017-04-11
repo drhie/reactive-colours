@@ -67,7 +67,6 @@ class BoxShell extends React.Component {
     })
     .then(function(response) {
       response.data.forEach(function(object) {
-        var name = object.name;
         var points = object.points;
         highScorers.push(points)
       })
@@ -179,24 +178,7 @@ class BoxShell extends React.Component {
   }
 
   gameReset() {
-    //Insert AJAX call here
-    var points = this.state.points
-    axios({
-      method: 'post',
-      dataType: 'json',
-      url: 'https://reactive-colours.herokuapp.com/scores.json',
-      data: {
-        'score': {
-          'points': points
-        }
-      }
-    })
-    .then(function(response) {
-      // console.log(response);
-    })
-    .catch(function(response) {
-      // console.log(response);
-    })
+    this.postScore();
     this.setState({
       lives: 3,
       urgent: 'black',
@@ -223,18 +205,36 @@ class BoxShell extends React.Component {
   }
 
   handleReplay() {
-    this.gameReset();
     this.handleStart();
   }
 
   handleMainMenu() {
-    this.gameReset();
     this.setState({
       points: 0,
       gameStart: false,
       gameOver: false,
       timer: -1,
       highScores: this.collectHighScorers()
+    })
+  }
+
+  postScore() {
+    var points = this.state.points
+    axios({
+      method: 'post',
+      dataType: 'json',
+      url: 'https://reactive-colours.herokuapp.com/scores.json',
+      data: {
+        'score': {
+          'points': points
+        }
+      }
+    })
+    .then(function(response) {
+      // console.log(response);
+    })
+    .catch(function(response) {
+      // console.log(response);
     })
   }
 
