@@ -233,7 +233,8 @@ class BoxShell extends React.Component {
       points: 0,
       gameStart: false,
       gameOver: false,
-      timer: -1
+      timer: -1,
+      highScores: this.collectHighScorers()
     })
   }
 
