@@ -164,11 +164,12 @@ class BoxShell extends React.Component {
       bomb: starBomb[1],
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
+    }, function() {
+      if (lives <= 0) {
+        this.gameReset()
+      }      
     });
     this.resetAnimation();
-    if (lives <= 0) {
-      this.gameReset()
-    }
   }
 
   resetAnimation() {
