@@ -215,6 +215,12 @@
   height: 36px;
 }
 
+#highScore {
+  font-family: 'Press Start 2P';
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
+}
 .Start {
   width: 100%;
 }

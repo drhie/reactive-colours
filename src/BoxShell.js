@@ -46,6 +46,7 @@ class BoxShell extends React.Component {
       gameStart: false,
       gameOver: false,
       animations: [],
+      highScores: this.collectHighScorers()
     }
   }
 
@@ -55,13 +56,21 @@ class BoxShell extends React.Component {
       () => this.tick(),
       1000
     )
-    axios.get('http://localhost:3000/scores.json', 'json')
+  }
+
+  collectHighScorers() {
+    var highScorers = []
+    axios.get('http://reactive-colours.herokuapp.com/scores', 'json')
     .then(function(response) {
-      console.log(response);
+      response.data.forEach(function(object) {
+        var name = object.name;
+        var points = object.points;
+        highScorers.push(points)
+      })
     })
     .catch(function(error) {
-      console.log(error);
     })
+    return highScorers
   }
 
   componentWillUnmount() {
@@ -160,13 +169,29 @@ class BoxShell extends React.Component {
   }
 
   resetAnimation() {
-    console.log(this.state.gameOver);
     setTimeout(()=>{this.setState({
       animations: Array(16).fill(""),
     })}, 1000);
   }
 
   gameReset() {
+    //Insert AJAX call here
+    var points = this.state.points
+    axios({
+      method: 'post',
+      url: 'http://reactive-colours.herokuapp.com/scores',
+      data: {
+        'score': {
+          'points': points
+        }
+      }
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(response) {
+      console.log(response);
+    })
     this.setState({
       lives: 3,
       urgent: 'black',
@@ -233,7 +258,8 @@ class BoxShell extends React.Component {
 
     } else {
       statusBarToggle = <Start
-        onClick={()=>this.handleStart()}/>
+        onClick={()=>this.handleStart()}
+        highScores={this.state.highScores}/>
     }
     if (!this.state.gameOver) {
       gameOverToggle = (

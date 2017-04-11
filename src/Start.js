@@ -1,10 +1,11 @@
 import React from 'react';
+var HighScore = require('./HighScore')
 
 class Start extends React.Component {
   constructor() {
     super();
     this.state = {
-      howtoplay: false
+      howtoplay: false,
     }
   }
 
@@ -13,13 +14,16 @@ class Start extends React.Component {
     if(!this.state.howtoplay) {
       toggleStart =
         <div>
-          <button className="Start Bank" onClick={()=>{this.props.onClick()}}>
-            <h2 id="start-heading">START GAME</h2>
-          </button>
-          <button className="Start Bank" onClick={()=>{this.setState({howtoplay:true})}}>
-            <h2 id="start-heading">HOW TO PLAY</h2>
-          </button>
-          <p style={{padding:"0 8px"}}><em>Familiarize yourself with the colour board to the left. When you are ready, press START GAME.</em></p>
+          <div>
+            <button className="Start Bank" onClick={()=>{this.props.onClick()}}>
+              <h2 id="start-heading">START GAME</h2>
+            </button>
+            <button className="Start Bank" onClick={()=>{this.setState({howtoplay:true})}}>
+              <h2 id="start-heading">HOW TO PLAY</h2>
+            </button>
+            <p style={{padding:"0 8px"}}><em>Familiarize yourself with the colour board to the left. When you are ready, press START GAME.</em></p>
+          </div>
+          <HighScore highScores={this.props.highScores} />
         </div>
     } else {
       toggleStart =
