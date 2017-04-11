@@ -60,7 +60,11 @@ class BoxShell extends React.Component {
 
   collectHighScorers() {
     var highScorers = []
-    axios.get('http://reactive-colours.herokuapp.com/scores', 'json')
+    axios({
+      method: 'get',
+      dataType: 'json',
+      url: 'http://reactive-colours.herokuapp.com/scores',
+    })
     .then(function(response) {
       response.data.forEach(function(object) {
         var name = object.name;
@@ -179,6 +183,7 @@ class BoxShell extends React.Component {
     var points = this.state.points
     axios({
       method: 'post',
+      dataType: 'json',
       url: 'http://reactive-colours.herokuapp.com/scores',
       data: {
         'score': {
