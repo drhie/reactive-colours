@@ -1,5 +1,4 @@
 import React from 'react';
-
 function Bank (props) {
   return (
     <button
@@ -7,7 +6,6 @@ function Bank (props) {
       className="Bank"
       onClick={()=>{props.onBank()}}
       tabIndex="0"
-      onKeyDown={props.handleKeyDown}
       >
       <h2>Bank!</h2>
     </button>

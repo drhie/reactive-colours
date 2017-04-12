@@ -13,7 +13,6 @@ Array.prototype.sample = function(){
 }
 
 
-
 function randomArray(size) {
   var array = [];
   var colors = ['red', 'orange', 'yellow', 'green', 'steelblue', 'mediumpurple'];
@@ -55,6 +54,14 @@ class BoxShell extends React.Component {
     this.timerID = setInterval(
       () => this.tick(),
       1000
+    )
+
+    addEventListener('keypress',
+      function(e) {
+        if(e.keyCode === 13 || e.keyCode === 32 && this.state.gameStart) {
+          this.handleBank()
+        }
+      }.bind(this)
     )
   }
 
@@ -167,7 +174,7 @@ class BoxShell extends React.Component {
     }, function() {
       if (lives <= 0) {
         this.gameReset()
-      }      
+      }
     });
     this.resetAnimation();
   }
@@ -258,7 +265,7 @@ class BoxShell extends React.Component {
       bankButtonToggle =
       <Bank
         onBank={() =>this.handleBank()}
-        handleKeyDown={()=>this.handleKeyDown(event)}/>
+      />
       scoreToggle = <div id="scoreContainer">
                   <Score score={this.state.points} />
                 </div>
