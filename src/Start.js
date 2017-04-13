@@ -52,7 +52,7 @@ class Start extends React.Component {
           </div>
           <div className="instructionSection">
             <p className="instructions"><strong>BANK</strong> the stars <i className="fa fa-star"/> on the board to increase your score and time. But if you <strong>BANK</strong> when there's a bomb <i className="fa fa-bomb" /> on the board too, you will lose 1 life, and your time and score will drop.</p>
-          </div>
+        </div>
           <div className="instructionSection">
             <p className="instructions">The game is over when you either lose all of your lives or run out of time.</p>
           </div>

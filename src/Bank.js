@@ -7,7 +7,11 @@ function Bank (props) {
       onClick={()=>{props.onBank()}}
       tabIndex="0"
       >
-      <h2>Bank!</h2>
+      <h2 style={{margin:10}}>
+        Bank!
+        <div style={{fontSize:'0.5em', marginTop: 2}}>(Press ENTER)</div>
+      </h2>
+
     </button>
   )
 }

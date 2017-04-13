@@ -14,21 +14,18 @@ class PointsBar extends React.Component {
         <div className="statusBar">
           {this.livesCounter(this.props.lives-1)}
         </div>
-        <div>
-          <div className="Box status" style={{background:this.props.star}}>
+        <h3 style={{marginBottom:0, fontFamily: 'Press Start 2P', textAlign: 'center'}}>CURRENT REACTIVE COLOURS</h3>
+        <div style={{display:"flex", justifyContent: "space-around"}}>
+          <div className="Box status" style={{background:this.props.star, width:50, height:50}}>
             <p>
               <i className="fa fa-star" />
             </p>
           </div>
-          Stars (the more the better!)
-        </div>
-        <div>
-          <div className="Box status" style={{background:this.props.bomb}}>
+          <div className="Box status" style={{background:this.props.bomb, width:50, height:50}}>
             <p>
               <i className="fa fa-bomb" />
             </p>
           </div>
-          Bombs (avoid these!)
         </div>
       </div>
     );
