@@ -9,7 +9,7 @@ function Bank (props) {
       >
       <h2 style={{margin:10}}>
         Bank!
-        <div style={{fontSize:'0.5em', marginTop: 2}}>(Press ENTER)</div>
+        <div style={{fontSize:'0.5em', marginTop: 2}}>(Press SPACEBAR)</div>
       </h2>
 
     </button>
