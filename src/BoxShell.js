@@ -12,6 +12,8 @@ Array.prototype.sample = function(){
   return this[Math.floor(Math.random()*this.length)];
 }
 
+const DEFAULT_LIFE = 3;
+const DEFAULT_POINTS = 10;
 
 function randomArray(size) {
   var array = [];
@@ -40,7 +42,7 @@ class BoxShell extends React.Component {
       star: starBomb[0],
       bomb: starBomb[1],
       points: 0,
-      lives: 3,
+      lives: DEFAULT_LIFE,
       urgent: 'black',
       gameStart: false,
       gameOver: false,
@@ -157,7 +159,7 @@ class BoxShell extends React.Component {
       }
     });
     if (points < 0) { points = 0 }
-    if (points-this.state.points > 9) { bonusLife ++ }
+    if (points-this.state.points >= DEFAULT_POINTS) { bonusLife ++ }
     if (bombExists) { lives -= 1 }
     var starBomb = generateStarBomb()
     if (this.state.timer + bonusTime > 10) {
@@ -172,9 +174,20 @@ class BoxShell extends React.Component {
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
     }, function() {
-      if (lives <= 0 || timeLeft <= 0) { this.gameReset() }
+      if (this.state.lives > 9) { this.boostTime() }
+      if ((lives <= 0) || (this.state.timer <= 0)) { this.gameReset() }
     });
+
     this.resetAnimation();
+  }
+
+  boostTime() {
+    let currentTime = this.state.timer;
+    let bonusTime = 20;
+    this.setState({
+      timer: currentTime + bonusTime,
+      lives: DEFAULT_LIFE
+    })
   }
 
   resetAnimation() {
@@ -183,10 +196,11 @@ class BoxShell extends React.Component {
     })}, 1000);
   }
 
+
   gameReset() {
     this.postScore();
     this.setState({
-      lives: 3,
+      lives: DEFAULT_LIFE,
       urgent: 'black',
       gameStart: false,
       gameOver: true,
