@@ -93,7 +93,7 @@ class BoxShell extends React.Component {
     if (timeLeft < 11) {
       this.setState({urgent: 'red'})
     }
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       this.gameReset()
     }
     this.setState(
@@ -172,9 +172,7 @@ class BoxShell extends React.Component {
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
     }, function() {
-      if (lives <= 0) {
-        this.gameReset()
-      }
+      if (lives <= 0 || timeLeft <= 0) { this.gameReset() }
     });
     this.resetAnimation();
   }
