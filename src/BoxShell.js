@@ -13,7 +13,8 @@ Array.prototype.sample = function(){
 }
 
 const DEFAULT_LIFE = 3;
-const DEFAULT_POINTS = 10;
+const DEFAULT_POINTS = 8;
+const DEFAULT_TIMER = 60;
 
 function randomArray(size) {
   var array = [];
@@ -48,23 +49,30 @@ class BoxShell extends React.Component {
       gameOver: false,
       animations: [],
       highScores: this.collectHighScorers(),
-      glow: 'none'
+      glow: 'none',
     }
   }
 
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    )
-
     addEventListener('keypress',
       function(e) {
         if(e.keyCode === 13 || e.keyCode === 32 && this.state.gameStart) {
           this.handleBank()
         }
       }.bind(this)
+    )
+  }
+
+  componentWillUnmount() {
+    document.getElementById('gameOver').play();
+    clearInterval(this.timerID);
+  }
+
+  startTimer() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
     )
   }
 
@@ -86,18 +94,15 @@ class BoxShell extends React.Component {
     return highScorers
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
   tick() {
     var timeLeft = this.state.timer;
     timeLeft --
-    if (timeLeft < 11) {
-      this.setState({urgent: 'red'})
+    if (timeLeft < 11 && timeLeft >= 0) {
+      this.setState({urgent: 'red'});
+      document.getElementById('tick').play();
     }
     if (timeLeft <= 0) {
-      this.gameReset()
+      this.gameReset();
     }
     this.setState(
       {timer: timeLeft}
@@ -149,25 +154,34 @@ class BoxShell extends React.Component {
     let bonusLife = 0;
     let bonusTime = 0;
     let glowState = null;
+    var bankPoints = 0;
     this.state.boxes.forEach(function (box, i) {
       if (box === star) {
         animations[i] = "animated flipInY";
-        points ++;
+        bankPoints ++;
         bonusTime ++;
       } else if (box === bomb) {
-        points --;
+        bankPoints --;
         bonusTime --;
         bombExists = true
       }
     });
-    if (points < 0) {
-      points = 0;
-      glowState = "0px 0px 45px red"
-    } else {
-      glowState = "0px 0px 45px white";
+    points += bankPoints;
+    if (points < 0) { points = 0; }
+    if (points-this.state.points >= DEFAULT_POINTS) {
+      bonusLife ++;
+      document.getElementById('lifeUp').play();
     }
-    if (points-this.state.points >= DEFAULT_POINTS) { bonusLife ++ }
-    if (bombExists) { lives -= 1 }
+    if (bombExists) {
+      lives -= 1
+      document.getElementById('bomb').play();
+      glowState = "0 0 45px red";
+    } else {
+      if (bankPoints > 0) {
+        glowState = "0 0 45px white"
+        document.getElementById('bank').play();
+      }
+    }
     var starBomb = generateStarBomb()
     if (this.state.timer + bonusTime > 10) {
       this.setState({urgent: 'black'})
@@ -185,17 +199,21 @@ class BoxShell extends React.Component {
       if (this.state.lives > 9) { this.boostTime() }
       if ((lives <= 0) || (this.state.timer <= 0)) { this.gameReset() }
     });
-
     this.resetAnimation();
   }
 
   boostTime() {
     let currentTime = this.state.timer;
     let bonusTime = 20;
+    let points = this.state.points;
+    let bonusPoints = 100;
+    points += bonusPoints;
     this.setState({
       timer: currentTime + bonusTime,
-      lives: DEFAULT_LIFE
+      lives: DEFAULT_LIFE,
+      points: points,
     })
+    document.getElementById('timeBoost').play();
   }
 
   resetAnimation() {
@@ -209,6 +227,7 @@ class BoxShell extends React.Component {
 
 
   gameReset() {
+    this.componentWillUnmount();
     this.postScore();
     this.setState({
       lives: DEFAULT_LIFE,
@@ -219,12 +238,13 @@ class BoxShell extends React.Component {
   }
 
   handleStart() {
+    this.startTimer();
     this.setState({
       gameStart: true,
       gameOver: false,
       boxes: randomArray(16),
       urgent: 'black',
-      timer: 60,
+      timer: DEFAULT_TIMER,
       points: 0
     })
   }
