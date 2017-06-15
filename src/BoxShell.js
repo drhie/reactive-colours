@@ -47,7 +47,8 @@ class BoxShell extends React.Component {
       gameStart: false,
       gameOver: false,
       animations: [],
-      highScores: this.collectHighScorers()
+      highScores: this.collectHighScorers(),
+      glow: 'none'
     }
   }
 
@@ -147,6 +148,7 @@ class BoxShell extends React.Component {
     let bombExists = false;
     let bonusLife = 0;
     let bonusTime = 0;
+    let glowState = null;
     this.state.boxes.forEach(function (box, i) {
       if (box === star) {
         animations[i] = "animated flipInY";
@@ -158,7 +160,12 @@ class BoxShell extends React.Component {
         bombExists = true
       }
     });
-    if (points < 0) { points = 0 }
+    if (points < 0) {
+      points = 0;
+      glowState = "0px 0px 45px red"
+    } else {
+      glowState = "0px 0px 45px white";
+    }
     if (points-this.state.points >= DEFAULT_POINTS) { bonusLife ++ }
     if (bombExists) { lives -= 1 }
     var starBomb = generateStarBomb()
@@ -173,6 +180,7 @@ class BoxShell extends React.Component {
       bomb: starBomb[1],
       lives: lives + bonusLife,
       timer: Math.floor(this.state.timer + bonusTime),
+      glow: glowState,
     }, function() {
       if (this.state.lives > 9) { this.boostTime() }
       if ((lives <= 0) || (this.state.timer <= 0)) { this.gameReset() }
@@ -194,6 +202,9 @@ class BoxShell extends React.Component {
     setTimeout(()=>{this.setState({
       animations: Array(16).fill(""),
     })}, 1000);
+    setTimeout(()=>{this.setState({
+      glow: null,
+    })}, 200);
   }
 
 
@@ -278,7 +289,7 @@ class BoxShell extends React.Component {
       <Bank
         onBank={() =>this.handleBank()}
       />
-      scoreToggle = <div id="scoreContainer">
+    scoreToggle = <div id="scoreContainer" style={{boxShadow: this.state.glow}}>
                   <Score score={this.state.points} />
                 </div>
 
@@ -290,7 +301,7 @@ class BoxShell extends React.Component {
     if (!this.state.gameOver) {
       gameOverToggle = (
         <div>
-          <div id="gameContainer">
+          <div id="gameContainer" style={{boxShadow: this.state.glow}}>
             <h2 id="colorBoard">COLOUR BOARD</h2>
             <div id="leftButtonRow">
               <div className="ButtonShell">
@@ -339,7 +350,7 @@ class BoxShell extends React.Component {
             {bankButtonToggle}
           </div>
           <div id="rightDiv">
-            <div id="statContainer">
+            <div id="statContainer" style={{boxShadow: this.state.glow}}>
               {statusBarToggle}
             </div>
             {scoreToggle}
