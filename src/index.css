@@ -42,3 +42,9 @@ footer p:first-child {
 footer p:last-child {
   float: right;
 }
+
+@media (max-width: 350px) {
+  footer p {
+    font-size: 0.8em;
+  }
+}

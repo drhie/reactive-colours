@@ -6,6 +6,7 @@ var Bank = require('./Bank');
 var Timer = require('./Timer');
 var Score = require('./Score');
 var Start = require('./Start');
+var LifeBar = require('./LifeBar');
 import axios from 'axios';
 
 Array.prototype.sample = function(){
@@ -298,11 +299,14 @@ class BoxShell extends React.Component {
       statusBarToggle = <div>
         <Timer
           timer={this.state.timer}
-          urgent={this.state.urgent}/>
+          urgent={this.state.urgent}
+          />
+        <LifeBar
+          lives={this.state.lives}
+          />
         <PointsBar
           star={this.state.star}
           bomb={this.state.bomb}
-          lives={this.state.lives}
           />
       </div>;
       bankButtonToggle =
@@ -320,7 +324,7 @@ class BoxShell extends React.Component {
     }
     if (!this.state.gameOver) {
       gameOverToggle = (
-        <div>
+        <div id="mobileContainer">
           <div id="gameContainer" style={{boxShadow: this.state.glow}}>
             <h2 id="colorBoard">COLOUR BOARD</h2>
             <div id="leftButtonRow">
@@ -379,7 +383,7 @@ class BoxShell extends React.Component {
       )
     } else {
       gameOverToggle = (
-        <div id="gameContainer">
+        <div id="mobileContainer">
           <h1>GAME OVER</h1>
           <h3 id="score-heading">YOUR SCORE: {this.state.points}</h3>
           <button className="Bank" onClick={()=>this.handleReplay()}>

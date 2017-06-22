@@ -1,5 +1,4 @@
 var React = require('react');
-import axios from 'axios';
 
 class HighScore extends React.Component {
   constructor() {
